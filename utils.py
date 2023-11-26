@@ -9,6 +9,7 @@ import pytesseract
 import xlsxwriter
 import pandas as pd
 import tempfile
+import os
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\Tesseract.exe'
 
 parameter = ['','HEMATOLOGY', 'Routine Hematology', 'Hemoglobin', 'Hematocrit', 'Leukocyte',
@@ -23,6 +24,8 @@ parameter = ['','HEMATOLOGY', 'Routine Hematology', 'Hemoglobin', 'Hematocrit', 
     'Leucocyte', 'Epithel', 'Crystal', 'Bacteria', 'Others']
 
 parameter_df = pd.DataFrame(parameter)
+poppler_path = 'poppler-23.11.0/Library/bin'
+os.environ['PATH'] += os.pathsep + poppler_path
 
 def calculate_sum(a):
     total = []
@@ -31,7 +34,7 @@ def calculate_sum(a):
     return sum(total)
 
 def pdf_to_image(pdf_path):
-    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480), poppler_path='poppler-23.11.0/Library/bin')
+    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480)) #poppler_path='poppler-23.11.0/Library/bin')
     return imgs
 
 def combine_images(images):
