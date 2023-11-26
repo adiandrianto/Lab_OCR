@@ -5,7 +5,6 @@ import tempfile
 import os
 from pathlib import Path
 
-
 def uploaded_path(uploaded_files):
     file_paths = []
     temp_dir = tempfile.mkdtemp()
