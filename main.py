@@ -42,17 +42,42 @@ def process_pdf_files(path):
     
     return df_to_excel(combined_df_list,1)
 
-uploaded_files = st.file_uploader("Silahkan upload hasil lab format pdf", type="pdf",accept_multiple_files=True)
-    
-if st.button("Convert to Excel"):
-    if uploaded_files:
-        path = uploaded_path(uploaded_files)
-        st.write("Memproses, tunggu sebentar")
-        output = process_pdf_files(path)
-        st.write("Proses selesai, silahkan download")
-    
-        with open(output, "rb") as file:
-            file_bytes = file.read()
-        st.download_button(label="Download Excel File", data=file_bytes, file_name='hasil.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    else:
-        st.warning("Please upload PDF files.")
+def login():
+    st.title("Login")
+
+    # Retrieve username and password from st.secrets
+    username = st.secrets["login"]["username"]
+    password = st.secrets["login"]["password"]
+
+    # Create input fields for username and password
+    user_input = st.text_input("Username")
+    pass_input = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if username == "your_username" and password == "your_password":
+            return True
+        else:
+            st.error("Invalid username or password")
+    return False
+
+def main():
+    st.title("Lab Result PDF to Excel")
+    uploaded_files = st.file_uploader("Upload PDF file(s)", type="pdf", accept_multiple_files=True)
+
+    if st.button("Convert to Excel"):
+        if uploaded_files:
+            path = uploaded_path(uploaded_files)
+            st.write("Processing, please wait...")
+            output = process_pdf_files(path)
+            st.write("Processing complete!")
+
+            # Download button for the processed file
+            with open(output, "rb") as file:
+                file_bytes = file.read()
+            st.download_button(label="Download Excel File", data=file_bytes, file_name='hasil.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        else:
+            st.warning("Please upload PDF files.")  
+
+if __name__ == "__main__":
+    if login():
+        main()
