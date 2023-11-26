@@ -1,15 +1,8 @@
-from pdf2image import convert_from_path
 from PIL import Image
-from pdf2image.exceptions import (
-    PDFInfoNotInstalledError,
-    PDFPageCountError,
-    PDFSyntaxError
-)
 import pytesseract
 import xlsxwriter
 import pandas as pd
 import tempfile
-import os
 import fitz
 pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
@@ -25,8 +18,6 @@ parameter = ['','HEMATOLOGY', 'Routine Hematology', 'Hemoglobin', 'Hematocrit', 
     'Leucocyte', 'Epithel', 'Crystal', 'Bacteria', 'Others']
 
 parameter_df = pd.DataFrame(parameter)
-poppler_path = 'poppler-23.11.0/Library/bin'
-os.environ['PATH'] += os.pathsep + poppler_path
 
 def calculate_sum(a):
     total = []
@@ -108,6 +99,7 @@ def convert_img_to_df(*args):
         param_df.replace({'©)': 'Negative'}, inplace=True)
         param_df.replace({'Q': 'Negative'}, inplace=True)
         param_df.replace({'O': 'Negative'}, inplace=True)
+        param_df.replace({'0)': 'Negative'}, inplace=True)
         param_df.replace({'i)': 'Negative'}, inplace=True)
         param_df.replace({'(-)': 'Negative'}, inplace=True)
         param_df.replace({'(+)': 'Positive'}, inplace=True)
