@@ -41,9 +41,6 @@ def pdf_to_image(pdf_path):
         out.append(img)
         
     return out
-#def pdf_to_image(pdf_path):
-#    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480), poppler_path=poppler_path)
-#    return imgs
 
 def combine_images(images):
     total_width = images[0].width * 2  # Assuming 2 pages per image

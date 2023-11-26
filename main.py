@@ -61,23 +61,23 @@ def login():
     return False
 
 def main():
-    st.title("Lab Result PDF to Excel")
-    uploaded_files = st.file_uploader("Upload PDF file(s)", type="pdf", accept_multiple_files=True)
-
-    if st.button("Convert to Excel"):
-        if uploaded_files:
-            path = uploaded_path(uploaded_files)
-            st.write("Processing, please wait...")
-            output = process_pdf_files(path)
-            st.write("Processing complete!")
-
-            # Download button for the processed file
-            with open(output, "rb") as file:
-                file_bytes = file.read()
-            st.download_button(label="Download Excel File", data=file_bytes, file_name='hasil.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        else:
-            st.warning("Please upload PDF files.")  
+      
 
 if __name__ == "__main__":
     if login():
-        main()
+        st.title("Lab Result PDF to Excel")
+        uploaded_files = st.file_uploader("Upload PDF file(s)", type="pdf", accept_multiple_files=True)
+
+        if st.button("Convert to Excel"):
+            if uploaded_files:
+                path = uploaded_path(uploaded_files)
+                st.write("Processing, please wait...")
+                output = process_pdf_files(path)
+                st.write("Processing complete!")
+
+            # Download button for the processed file
+            with open(output, "rb") as file:
+            file_bytes = file.read()
+            st.download_button(label="Download Excel File", data=file_bytes, file_name='hasil.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        else:
+            st.warning("Please upload PDF files.")
