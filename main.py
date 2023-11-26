@@ -73,8 +73,8 @@ if __name__ == "__main__":
                 st.write("Processing complete!")
 
             # Download button for the processed file
-            with open(output, "rb") as file:
-            file_bytes = file.read()
-            st.download_button(label="Download Excel File", data=file_bytes, file_name='hasil.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        else:
-            st.warning("Please upload PDF files.")
+                with open(output, "rb") as file:
+                file_bytes = file.read()
+                st.download_button(label="Download Excel File", data=file_bytes, file_name='hasil.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            else:
+                st.warning("Please upload PDF files.")
