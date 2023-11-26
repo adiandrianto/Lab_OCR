@@ -79,5 +79,9 @@ def main():
             st.warning("Please upload PDF files.")  
 
 if __name__ == "__main__":
-    if login():
-        main()
+    show_login = True
+    while show_login:
+        login_success = login()
+        if login_success:
+            show_login = False
+            main()
