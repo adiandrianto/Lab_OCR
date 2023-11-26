@@ -34,7 +34,7 @@ def calculate_sum(a):
     return sum(total)
 
 def pdf_to_image(pdf_path):
-    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480)) #poppler_path='poppler-23.11.0/Library/bin')
+    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480), poppler_path=poppler_path)
     return imgs
 
 def combine_images(images):
