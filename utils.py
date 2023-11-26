@@ -10,6 +10,7 @@ import xlsxwriter
 import pandas as pd
 import tempfile
 import os
+import fitz
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\Tesseract.exe'
 
 parameter = ['','HEMATOLOGY', 'Routine Hematology', 'Hemoglobin', 'Hematocrit', 'Leukocyte',
@@ -34,8 +35,24 @@ def calculate_sum(a):
     return sum(total)
 
 def pdf_to_image(pdf_path):
-    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480), poppler_path=poppler_path)
-    return imgs
+    width=1754 
+    height=2480
+    zoom_x = 2.0
+    zoom_y = 2.0
+    mat = fitz.Matrix(zoom_x, zoom_y)
+    
+    doc = fitz.open(pdf_path)
+    out = []
+    for page in doc:  # iterate through the pages
+        pix = page.get_pixmap(matrix=mat)  # render page to an image
+        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+        img = img.resize((width, height), Image.BICUBIC)
+        out.append(img)
+        
+    return out
+#def pdf_to_image(pdf_path):
+#    imgs = convert_from_path(pdf_path, grayscale=True, dpi=300, use_pdftocairo=True, size=(1754, 2480), poppler_path=poppler_path)
+#    return imgs
 
 def combine_images(images):
     total_width = images[0].width * 2  # Assuming 2 pages per image
@@ -87,7 +104,11 @@ def convert_img_to_df(*args):
         param_df.replace({'()': 'Negative'}, inplace=True) # give (-) on urine result, otherwise it gives '()'
         param_df.replace({')': 'Negative'}, inplace=True)
         param_df.replace({'(¢)': 'Negative'}, inplace=True)
+        param_df.replace({'¢)': 'Negative'}, inplace=True)
         param_df.replace({'©)': 'Negative'}, inplace=True)
+        param_df.replace({'Q': 'Negative'}, inplace=True)
+        param_df.replace({'O': 'Negative'}, inplace=True)
+        param_df.replace({'i)': 'Negative'}, inplace=True)
         param_df.replace({'(-)': 'Negative'}, inplace=True)
         param_df.replace({'(+)': 'Positive'}, inplace=True)
         empty_rows = param_df.apply(lambda row: row.str.strip().eq(''), axis=1).all(axis=1)
