@@ -60,9 +60,6 @@ def login():
             st.error("Invalid username or password")
     return False
 
-def main():
-      
-
 if __name__ == "__main__":
     if login():
         st.title("Lab Result PDF to Excel")
