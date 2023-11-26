@@ -1,0 +1,5 @@
+pdf2image
+pandas
+xlsxwriter
+pytesseract
+PIL
