@@ -54,7 +54,7 @@ def login():
     pass_input = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        if username == username and password == password:
+        if user_input == username and pass_input == password:
             return True
         else:
             st.error("Invalid username or password")
