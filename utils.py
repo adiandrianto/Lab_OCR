@@ -11,7 +11,7 @@ import pandas as pd
 import tempfile
 import os
 import fitz
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\Tesseract.exe'
+#pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
 parameter = ['','HEMATOLOGY', 'Routine Hematology', 'Hemoglobin', 'Hematocrit', 'Leukocyte',
     'Erythrocyte', 'Thrombocyte', 'ESR', 'Erythrocyte Index', 'MCV', 'MCH', 'MCHC',
