@@ -48,8 +48,7 @@ st.sidebar.write("2. Click 'Convert to Excel'")
 st.sidebar.write("3. When the proccess is completed, click 'Download Excel File' button to download result")
     
 st.title("Lab Result PDF to Excel")
-st.header("by Adi Andrianto")
-uploaded_files = st.file_uploader("Upload PDF file(s)", type="pdf", accept_multiple_files=True)
+uploaded_files = st.file_uploader("created by Adi Andrianto", type="pdf", accept_multiple_files=True)
 
 if st.button("Convert to Excel"):
     if uploaded_files:
