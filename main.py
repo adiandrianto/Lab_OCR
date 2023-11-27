@@ -43,9 +43,9 @@ def process_pdf_files(path):
     return df_to_excel(combined_df_list,1)
     
 st.sidebar.markdown("## Steps :")
-st.sidebar.write("1. upload lab result/s in pdf format")
-st.sidebar.write("2. Click 'Convert to Excel")
-st.sidebar.write("3. When the proccess is completed, click the button to download result")
+st.sidebar.write("1. Upload lab result/s in pdf format")
+st.sidebar.write("2. Click 'Convert to Excel'")
+st.sidebar.write("3. When the proccess is completed, click 'Download Excel File' button to download result")
     
 st.title("Lab Result PDF to Excel")
 st.header("by Adi Andrianto")
