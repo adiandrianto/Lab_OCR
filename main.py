@@ -41,7 +41,12 @@ def process_pdf_files(path):
         combined_df_list.append(dataframe)
     
     return df_to_excel(combined_df_list,1)
-
+with st.sidebar:
+    st.write("Steps :")
+    st.write("1. upload lab result/s in pdf format")
+    st.write("2. Click 'Convert to Excel")
+    st.write("3. When the proccess is completed, click the button to download result")
+    
 st.title("Lab Result PDF to Excel")
 st.header("by Adi Andrianto")
 uploaded_files = st.file_uploader("Upload PDF file(s)", type="pdf", accept_multiple_files=True)
