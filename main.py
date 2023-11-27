@@ -43,6 +43,7 @@ def process_pdf_files(path):
     return df_to_excel(combined_df_list,1)
 
 st.title("Lab Result PDF to Excel")
+st.header("by Adi Andrianto")
 uploaded_files = st.file_uploader("Upload PDF file(s)", type="pdf", accept_multiple_files=True)
 
 if st.button("Convert to Excel"):
