@@ -18,3 +18,5 @@ Steps :
 
 to see the deployed streamlit, click links :
 https://labocr-pml.streamlit.app/
+
+you can download lab result example in dataset folder.
