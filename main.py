@@ -4,8 +4,6 @@ import glob
 import tempfile
 import os
 from pathlib import Path
-import webbrowser
-
 
 def uploaded_path(uploaded_files):
     file_paths = []
@@ -44,14 +42,14 @@ def process_pdf_files(path):
     
     return df_to_excel(combined_df_list,1)
 
-github_url = "https://github.com/adiandrianto/Lab_OCR/blob/56f0509440654251d4698ebb250bb4eef8a9fc31/dataset/lab_result.zip"  # Replace with your GitHub file URL
+link_url = "https://www.example.com"
+link_text = "Click here to download lab result example"
 
 st.sidebar.markdown("## Steps :")
 st.sidebar.write("1. Upload lab result/s in pdf format")
 st.sidebar.write("2. Click 'Convert to Excel'")
 st.sidebar.write("3. When the proccess is completed, click 'Download Excel File' button to download result")
-if st.sidebar.button("Link to Lab Result Example"):
-    webbrowser.open_new_tab(github_url)
+st.markdown(f"[{link_text}]({link_url})", unsafe_allow_html=True)
 
 st.title("Lab Result PDF to Excel")
 uploaded_files = st.file_uploader("created by Adi Andrianto", type="pdf", accept_multiple_files=True)
