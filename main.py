@@ -46,9 +46,16 @@ def process_pdf_files(path):
     return df_to_excel(combined_df_list,1)
 
 def download_zip():
-    file_id = "1dvf8cUSJxQXrDNHYHFEk3lejIFTRwF6y"
-    output_file = "lab_data.zip"
-    gdown.download(f"https://drive.google.com/file/d/1dvf8cUSJxQXrDNHYHFEk3lejIFTRwF6y/view?usp=drive_link", output_file, quiet=False)
+    raw_url = "https://github.com/adiandrianto/Lab_OCR/blob/0fdd3dfc397fd918865273b6b66b494a9a2edad0/dataset/lab_result.zip"  # Replace with your GitHub raw file URL
+    response = requests.get(raw_url, stream=True)
+
+    if response.status_code == 200:
+        st.success("File successfully downloaded.")
+        with open("downloaded_file.zip", "wb") as file:
+            for chunk in response.iter_content(chunk_size=128):
+                file.write(chunk)
+    else:
+        st.error(f"Failed to download file. Status code: {response.status_code}")
 
 st.sidebar.markdown("## Steps :")
 st.sidebar.write("1. Upload lab result/s in pdf format")
