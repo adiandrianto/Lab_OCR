@@ -4,8 +4,7 @@ import glob
 import tempfile
 import os
 from pathlib import Path
-import requests
-import gdown
+import webbrowser
 
 
 def uploaded_path(uploaded_files):
@@ -45,24 +44,14 @@ def process_pdf_files(path):
     
     return df_to_excel(combined_df_list,1)
 
-def download_zip():
-    raw_url = "https://github.com/adiandrianto/Lab_OCR/blob/0fdd3dfc397fd918865273b6b66b494a9a2edad0/dataset/lab_result.zip"  # Replace with your GitHub raw file URL
-    response = requests.get(raw_url, stream=True)
-
-    if response.status_code == 200:
-        st.success("File successfully downloaded.")
-        with open("downloaded_file.zip", "wb") as file:
-            for chunk in response.iter_content(chunk_size=128):
-                file.write(chunk)
-    else:
-        st.error(f"Failed to download file. Status code: {response.status_code}")
+github_url = "https://github.com/adiandrianto/Lab_OCR/blob/56f0509440654251d4698ebb250bb4eef8a9fc31/dataset/lab_result.zip"  # Replace with your GitHub file URL
 
 st.sidebar.markdown("## Steps :")
 st.sidebar.write("1. Upload lab result/s in pdf format")
 st.sidebar.write("2. Click 'Convert to Excel'")
 st.sidebar.write("3. When the proccess is completed, click 'Download Excel File' button to download result")
-if st.sidebar.button("Download Lab Data"):
-    download_zip()
+if st.sidebar.button("Link to Lab Result Example"):
+    webbrowser.open_new_tab(github_url)
 
 st.title("Lab Result PDF to Excel")
 uploaded_files = st.file_uploader("created by Adi Andrianto", type="pdf", accept_multiple_files=True)
