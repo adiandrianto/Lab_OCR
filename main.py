@@ -4,6 +4,8 @@ import glob
 import tempfile
 import os
 from pathlib import Path
+import requests
+
 
 def uploaded_path(uploaded_files):
     file_paths = []
@@ -41,12 +43,25 @@ def process_pdf_files(path):
         combined_df_list.append(dataframe)
     
     return df_to_excel(combined_df_list,1)
-    
+
+def download_zip():
+    zip_url = "https://drive.google.com/file/d/1dvf8cUSJxQXrDNHYHFEk3lejIFTRwF6y/view?usp=drive_link"
+    response = requests.get(zip_url, stream=True)
+
+    if response.status_code == 200:
+        st.success("ZIP file successfully downloaded.")
+        with open("lab_data.zip", "wb") as zip_file:
+            for chunk in response.iter_content(chunk_size=128):
+                zip_file.write(chunk)
+    else:
+        st.error(f"Failed to download ZIP file. Status code: {response.status_code}")
+
 st.sidebar.markdown("## Steps :")
 st.sidebar.write("1. Upload lab result/s in pdf format")
 st.sidebar.write("2. Click 'Convert to Excel'")
 st.sidebar.write("3. When the proccess is completed, click 'Download Excel File' button to download result")
-    
+st.download_button(label="Download lab_result", key='download_button', file_name='lab data.zip', on_click= download_zip)
+
 st.title("Lab Result PDF to Excel")
 uploaded_files = st.file_uploader("created by Adi Andrianto", type="pdf", accept_multiple_files=True)
 

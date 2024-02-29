@@ -99,6 +99,7 @@ def convert_img_to_df(*args):
         param_df.replace({'0)': 'Negative'}, inplace=True)
         param_df.replace({'i)': 'Negative'}, inplace=True)
         param_df.replace({'(-)': 'Negative'}, inplace=True)
+        param_df.replace({'C)': 'Negative'}, inplace=True)
         param_df.replace({'(+)': 'Positive'}, inplace=True)
         empty_rows = param_df.apply(lambda row: row.str.strip().eq(''), axis=1).all(axis=1)
 
