@@ -42,14 +42,14 @@ def process_pdf_files(path):
     
     return df_to_excel(combined_df_list,1)
 
-link_url = "https://www.example.com"
+link_url = "https://github.com/adiandrianto/Lab_OCR/tree/1c3a2f46a2cf443f38e48d4953373a7eb5698fcc/dataset"
 link_text = "Click here to download lab result example"
 
 st.sidebar.markdown("## Steps :")
 st.sidebar.write("1. Upload lab result/s in pdf format")
 st.sidebar.write("2. Click 'Convert to Excel'")
 st.sidebar.write("3. When the proccess is completed, click 'Download Excel File' button to download result")
-st.markdown(f"[{link_text}]({link_url})", unsafe_allow_html=True)
+st.sidebar.markdown(f"[{link_text}]({link_url})", unsafe_allow_html=True)
 
 st.title("Lab Result PDF to Excel")
 uploaded_files = st.file_uploader("created by Adi Andrianto", type="pdf", accept_multiple_files=True)
